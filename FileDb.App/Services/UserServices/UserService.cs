@@ -1,11 +1,10 @@
 ﻿using FileDb.App.Brokers.Storages;
-using FileDbGroup.App.Brokers.Loggings;
-using FileDbGroup.App.Brokers.Storages;
-using FileDbGroup.App.Modals.Users;
+using FileDb.App.Brokers.Loggings;
+using FileDb.App.Models.Users;
 using System;
 using System.Collections.Generic;
 
-namespace FileDbGroup.App.Services.UserServices
+namespace FileDb.App.Services.UserServices
 {
     internal class UserService : IUserService
     {

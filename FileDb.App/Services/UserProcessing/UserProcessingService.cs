@@ -1,8 +1,8 @@
-﻿using FileDbGroup.App.Modals.Users;
-using FileDbGroup.App.Services.Identities;
-using FileDbGroup.App.Services.UserServices;
+﻿using FileDb.App.Models.Users;
+using FileDb.App.Services.Identities;
+using FileDb.App.Services.UserServices;
 
-namespace FileDbGroup.App.Services.UserProcessing
+namespace FileDb.App.Services.UserProcessing
 {
     internal class UserProcessingService : IUserProcessingService
     {

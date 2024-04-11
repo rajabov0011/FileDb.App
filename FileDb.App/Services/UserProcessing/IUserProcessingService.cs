@@ -1,5 +1,5 @@
 ﻿
-namespace FileDbGroup.App.Services.UserProcessing
+namespace FileDb.App.Services.UserProcessing
 {
     internal interface IUserProcessingService
     {

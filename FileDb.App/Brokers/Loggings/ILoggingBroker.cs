@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FileDbGroup.App.Brokers.Loggings
+namespace FileDb.App.Brokers.Loggings
 {
     internal interface ILoggingBroker
     {

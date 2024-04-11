@@ -1,4 +1,4 @@
-﻿namespace FileDbGroup.App.Modals.Users
+﻿namespace FileDb.App.Models.Users
 {
     internal class User
     {

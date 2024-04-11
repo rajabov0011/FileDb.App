@@ -1,7 +1,7 @@
-﻿using FileDbGroup.App.Modals.Users;
+﻿using FileDb.App.Models.Users;
 using System.Collections.Generic;
 
-namespace FileDbGroup.App.Brokers.Storages
+namespace FileDb.App.Brokers.Storages
 {
     internal interface IStoragesBroker
     {

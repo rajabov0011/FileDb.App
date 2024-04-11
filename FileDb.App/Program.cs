@@ -1,10 +1,9 @@
 ﻿using System;
 using FileDb.App.Brokers.Storages;
-using FileDbGroup.App.Brokers.Loggings;
-using FileDbGroup.App.Brokers.Storages;
-using FileDbGroup.App.Services.Identities;
-using FileDbGroup.App.Services.UserProcessing;
-using FileDbGroup.App.Services.UserServices;
+using FileDb.App.Brokers.Loggings;
+using FileDb.App.Services.Identities;
+using FileDb.App.Services.UserProcessing;
+using FileDb.App.Services.UserServices;
 
 internal class Program
 {

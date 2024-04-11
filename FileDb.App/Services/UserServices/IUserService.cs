@@ -1,6 +1,6 @@
-﻿using FileDbGroup.App.Modals.Users;
+﻿using FileDb.App.Models.Users;
 
-namespace FileDbGroup.App.Services.UserServices
+namespace FileDb.App.Services.UserServices
 {
     internal interface IUserService
     {

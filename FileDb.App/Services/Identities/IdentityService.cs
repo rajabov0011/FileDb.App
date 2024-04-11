@@ -1,9 +1,9 @@
 ﻿using FileDb.App.Brokers.Storages;
-using FileDbGroup.App.Brokers.Storages;
-using FileDbGroup.App.Modals.Users;
+using FileDb.App.Brokers.Storages;
+using FileDb.App.Models.Users;
 using System.Collections.Generic;
 
-namespace FileDbGroup.App.Services.Identities
+namespace FileDb.App.Services.Identities
 {
     internal sealed class IdentityService : IIdentityService
     {
