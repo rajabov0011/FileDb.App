@@ -8,7 +8,7 @@ namespace FileDb.App.Brokers.Storages
 {
     internal class FileStorageBroker : IStoragesBroker
     {
-        private const string FilePath = "../../../Users.txt";
+        private const string FilePath = "../../../UsersText.txt";
         public FileStorageBroker()
         {
             EnsureFileExists();

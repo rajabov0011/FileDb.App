@@ -12,10 +12,10 @@ namespace FileDbGroup.App.Services.UserServices
         private readonly IStoragesBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
 
-        public UserService()
+        public UserService(ILoggingBroker loggingBroker, IStoragesBroker storagesBroker)
         {
-            this.storageBroker = new JsonStorageBroker();
-            this.loggingBroker = new LoggingBroker();
+            this.storageBroker = storagesBroker;
+            this.loggingBroker = loggingBroker;
         }
 
         public User AddUser(User user)
@@ -24,6 +24,7 @@ namespace FileDbGroup.App.Services.UserServices
                 ? CreateAndLogInvalidUser()
                 : ValidateAndAddUser(user);
         }
+
         public void ShowUsers()
         {
             List<User> users = this.storageBroker.ReadAllUsers();
@@ -34,11 +35,13 @@ namespace FileDbGroup.App.Services.UserServices
             }
             this.loggingBroker.LogInforamation("===End of users===");
         }
+
         private User CreateAndLogInvalidUser()
         {
             this.loggingBroker.LogError("User is invalid");
             return new User();
         }
+
         private User ValidateAndAddUser(User user)
         {
             if (user.Id is 0 || String.IsNullOrWhiteSpace(user.Name))
@@ -52,6 +55,7 @@ namespace FileDbGroup.App.Services.UserServices
                 return this.storageBroker.AddUser(user);
             }
         }
+
         public void DeleteUser(int id)
         {
             List<User> users = this.storageBroker.ReadAllUsers();
@@ -66,6 +70,7 @@ namespace FileDbGroup.App.Services.UserServices
             }
             this.loggingBroker.LogError($"User with ID {id} not found.");
         }
+
         public void Update(User user)
         {
             if (user is null)
@@ -81,6 +86,7 @@ namespace FileDbGroup.App.Services.UserServices
 
             this.storageBroker.UpdateUser(user);
         }
+
         public void Delete(int id)
         {
             this.storageBroker.DeleteUser(id);

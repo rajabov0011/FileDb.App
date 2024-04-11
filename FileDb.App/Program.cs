@@ -70,10 +70,11 @@ internal class Program
 
     private static IUserProcessingService InitializeServices()
     {
-        IUserService userService = new UserService();
+        ILoggingBroker loggingBroker = new LoggingBroker();
+        IStoragesBroker storagesBroker = new JsonStorageBroker();
+        IUserService userService = new UserService(loggingBroker,storagesBroker);
         IIdentityService identityService = IdentityService.GetIdentityService();
         IUserProcessingService userProcessingService = new UserProcessingService(userService, identityService);
-        JsonStorageBroker jsonStorageBroker = new JsonStorageBroker();
 
         return userProcessingService;
     }
