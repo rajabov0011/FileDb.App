@@ -1,4 +1,5 @@
-﻿using FileDbGroup.App.Brokers.Storages;
+﻿using FileDb.App.Brokers.Storages;
+using FileDbGroup.App.Brokers.Storages;
 using FileDbGroup.App.Modals.Users;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace FileDbGroup.App.Services.Identities
 
         private IdentityService()
         {
-            this.storagesBroker = new FileStorageBroker();
+            this.storagesBroker = new JsonStorageBroker();
         }
 
         public static IdentityService GetIdentityService()
@@ -37,6 +38,5 @@ namespace FileDbGroup.App.Services.Identities
             return users[users.Count - 1].Id + 1;
             
         }
-        
     }
 }

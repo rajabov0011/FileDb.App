@@ -7,5 +7,6 @@ namespace FileDbGroup.App.Brokers.Loggings
         void LogInforamation(string message);
         void LogError(string userMessage);
         void LogError(Exception exception);
+        void LogSuccessUser(string message);
     }
 }

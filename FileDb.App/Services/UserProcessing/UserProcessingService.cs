@@ -23,10 +23,8 @@ namespace FileDbGroup.App.Services.UserProcessing
             this.userService.AddUser(user);
         }
 
-        public void DisplayUsers()
-        {
+        public void DisplayUsers() =>
             this.userService.ShowUsers();
-        }
 
         public void UpdateUser(int id, string name)
         {
@@ -38,9 +36,7 @@ namespace FileDbGroup.App.Services.UserProcessing
             this.userService.Update(user);
         }
 
-        public void DeleteUser(int id)
-        {
+        public void DeleteUser(int id) =>
             this.userService.Delete(id);
-        }
     }
 }

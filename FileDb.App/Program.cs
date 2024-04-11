@@ -1,4 +1,5 @@
 ﻿using System;
+using FileDb.App.Brokers.Storages;
 using FileDbGroup.App.Brokers.Loggings;
 using FileDbGroup.App.Brokers.Storages;
 using FileDbGroup.App.Services.Identities;
@@ -69,11 +70,10 @@ internal class Program
 
     private static IUserProcessingService InitializeServices()
     {
-        IStoragesBroker storagesBroker = new FileStorageBroker();
-        ILoggingBroker loggingBroker = new LoggingBroker();
-        IUserService userService = new UserService(storagesBroker, loggingBroker);
+        IUserService userService = new UserService();
         IIdentityService identityService = IdentityService.GetIdentityService();
         IUserProcessingService userProcessingService = new UserProcessingService(userService, identityService);
+        JsonStorageBroker jsonStorageBroker = new JsonStorageBroker();
 
         return userProcessingService;
     }

@@ -1,13 +1,14 @@
-﻿using FileDbGroup.App.Modals.Users;
-using System;
+﻿using FileDbGroup.App.Brokers.Storages;
+using FileDbGroup.App.Modals.Users;
 using System.Collections.Generic;
+using System;
 using System.IO;
 
-namespace FileDbGroup.App.Brokers.Storages
+namespace FileDb.App.Brokers.Storages
 {
     internal class FileStorageBroker : IStoragesBroker
     {
-        private const string FILEPATH = "../../../Users.txt";
+        private const string FilePath = "../../../Users.txt";
         public FileStorageBroker()
         {
             EnsureFileExists();
@@ -17,13 +18,14 @@ namespace FileDbGroup.App.Brokers.Storages
         {
             string userLine = $"{user.Id}*{user.Name}\n";
 
-            File.AppendAllText(FILEPATH, userLine);
+            File.AppendAllText(FilePath, userLine);
             return user;
         }
 
-        public void UpdateUser(User user)
+        public User UpdateUser(User user)
         {
             List<User> users = ReadAllUsers();
+
             for (int i = 0; i < users.Count; i++)
             {
                 if (users[i].Id == user.Id)
@@ -32,19 +34,23 @@ namespace FileDbGroup.App.Brokers.Storages
                     break;
                 }
             }
-            File.WriteAllText(FILEPATH, string.Empty);
-            foreach (User user1 in users)
+
+            File.WriteAllText(FilePath, string.Empty);
+
+            foreach (User userLine in users)
             {
-                AddUser(user1);
+                AddUser(userLine);
             }
+
+            return user;
         }
 
         public List<User> ReadAllUsers()
         {
-            string[] userLines = File.ReadAllLines(FILEPATH);
+            string[] userLines = File.ReadAllLines(FilePath);
             List<User> users = new List<User>();
 
-            foreach(string userLine  in userLines)
+            foreach (string userLine in userLines)
             {
                 string[] userProperties = userLine.Split("*");
                 User user = new User
@@ -58,26 +64,38 @@ namespace FileDbGroup.App.Brokers.Storages
             return users;
         }
 
-        private void EnsureFileExists()
+        public bool DeleteUser(int id)
         {
-            bool fileExists = File.Exists(FILEPATH);
-            if (fileExists is false)
+            bool isDeleted = false;
+            string[] userLines = File.ReadAllLines(FilePath);
+            int userLength = userLines.Length;
+            File.WriteAllText(FilePath, String.Empty);
+
+            for (int iterator = 0; iterator < userLength; iterator++)
             {
-                File.Create(FILEPATH).Close();
+                string userLine = userLines[iterator];
+                string[] contactProperties = userLine.Split("*");
+
+                if (contactProperties[0] == id.ToString())
+                {
+                    isDeleted = true;
+                }
+                else
+                {
+                    File.AppendAllText(FilePath, userLine);
+                }
             }
+
+            return isDeleted;
         }
 
-        public void DeleteUser(int id)
+        private void EnsureFileExists()
         {
-            List<User> users = this.ReadAllUsers();
-            File.WriteAllText(FILEPATH, string.Empty);
+            bool fileExists = File.Exists(FilePath);
 
-            for (int i = 0; i < users.Count; i++)
+            if (fileExists is false)
             {
-                if (users[i].Id != id)
-                {
-                    this.AddUser(users[i]);
-                }
+                File.Create(FilePath).Close();
             }
         }
     }

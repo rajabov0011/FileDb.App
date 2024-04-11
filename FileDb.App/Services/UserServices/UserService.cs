@@ -1,4 +1,5 @@
-﻿using FileDbGroup.App.Brokers.Loggings;
+﻿using FileDb.App.Brokers.Storages;
+using FileDbGroup.App.Brokers.Loggings;
 using FileDbGroup.App.Brokers.Storages;
 using FileDbGroup.App.Modals.Users;
 using System;
@@ -10,11 +11,13 @@ namespace FileDbGroup.App.Services.UserServices
     {
         private readonly IStoragesBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
-        public UserService(IStoragesBroker storageBroker, ILoggingBroker loggingBroker)
+
+        public UserService()
         {
-            this.storageBroker = storageBroker;
-            this.loggingBroker = loggingBroker;
+            this.storageBroker = new JsonStorageBroker();
+            this.loggingBroker = new LoggingBroker();
         }
+
         public User AddUser(User user)
         {
             return user is null
@@ -27,7 +30,7 @@ namespace FileDbGroup.App.Services.UserServices
 
             foreach (User user in users)
             {
-                this.loggingBroker.LogInforamation($"{user.Id}. {user.Name}");
+                this.loggingBroker.LogSuccessUser($"{user.Id}. {user.Name}");
             }
             this.loggingBroker.LogInforamation("===End of users===");
         }

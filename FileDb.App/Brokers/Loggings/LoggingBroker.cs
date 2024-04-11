@@ -22,4 +22,10 @@ internal class LoggingBroker : ILoggingBroker
         Console.WriteLine(exception.Message);
         Console.ResetColor();
     }
+    public void LogSuccessUser(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
 }
