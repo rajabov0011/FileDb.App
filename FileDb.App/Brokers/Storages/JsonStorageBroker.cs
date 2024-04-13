@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -39,7 +43,6 @@ namespace FileDb.App.Brokers.Storages
             List<User> users = JsonSerializer.Deserialize<List<User>>(usersItems);
             User updatedUser = users.FirstOrDefault(u => u.Id == user.Id);
             updatedUser.Name = user.Name;
-
             string serializedUsers = JsonSerializer.Serialize(users);
             File.WriteAllText(FilePath, serializedUsers);
 

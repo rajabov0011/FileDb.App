@@ -1,4 +1,7 @@
-﻿using FileDb.App.Brokers.Storages;
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
 using FileDb.App.Models.Users;
 using System.Collections.Generic;
 using System;
@@ -36,7 +39,6 @@ namespace FileDb.App.Brokers.Storages
             }
 
             File.WriteAllText(FilePath, string.Empty);
-
             foreach (User userLine in users)
             {
                 AddUser(userLine);

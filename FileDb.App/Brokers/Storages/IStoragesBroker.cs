@@ -1,4 +1,8 @@
-﻿using FileDb.App.Models.Users;
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
+using FileDb.App.Models.Users;
 using System.Collections.Generic;
 
 namespace FileDb.App.Brokers.Storages

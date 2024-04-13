@@ -1,9 +1,12 @@
-﻿using FileDb.App.Brokers.Storages;
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
+using FileDb.App.Brokers.Storages;
 using FileDb.App.Brokers.Loggings;
 using FileDb.App.Models.Users;
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace FileDb.App.Services.UserServices
 {

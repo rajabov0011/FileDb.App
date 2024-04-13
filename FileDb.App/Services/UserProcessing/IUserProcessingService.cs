@@ -1,4 +1,7 @@
-﻿
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
 namespace FileDb.App.Services.UserProcessing
 {
     internal interface IUserProcessingService
@@ -6,7 +9,6 @@ namespace FileDb.App.Services.UserProcessing
         void CreateNewUser(string name);
         void DisplayUsers();
         void UpdateUser(int id, string name);
-
         void DeleteUser(int id);
     }
 }

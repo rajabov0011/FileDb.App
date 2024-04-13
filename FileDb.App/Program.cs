@@ -1,4 +1,8 @@
-﻿using System;
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
+using System;
 using FileDb.App.Brokers.Storages;
 using FileDb.App.Services.Identities;
 using FileDb.App.Services.UserProcessing;
@@ -8,7 +12,6 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-
         Console.WriteLine("===== Welcome to my File Database Library =====");
         PrintTxtOrJSON();
         IUserProcessingService userProcessingService = InitializeServices();
@@ -77,7 +80,6 @@ internal class Program
         IStoragesBroker txtstrorageBroker = new FileStorageBroker();
         IUserService userService = null;
         IStoragesBroker storagesBroker = null;
-
 
         switch (choice)
         {

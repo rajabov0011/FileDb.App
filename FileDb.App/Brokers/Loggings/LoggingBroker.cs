@@ -1,4 +1,8 @@
-﻿using System;
+﻿//----------------------------------------
+// Tarteeb School (c) All rights reserved
+//----------------------------------------
+
+using System;
 
 namespace FileDb.App.Brokers.Loggings;
 
