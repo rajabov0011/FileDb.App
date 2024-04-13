@@ -3,6 +3,7 @@ using FileDb.App.Brokers.Loggings;
 using FileDb.App.Models.Users;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace FileDb.App.Services.UserServices
 {
@@ -11,10 +12,10 @@ namespace FileDb.App.Services.UserServices
         private readonly IStoragesBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
 
-        public UserService(ILoggingBroker loggingBroker, IStoragesBroker storagesBroker)
+        public UserService(IStoragesBroker storagesBroker)
         {
             this.storageBroker = storagesBroker;
-            this.loggingBroker = loggingBroker;
+            this.loggingBroker = new LoggingBroker();
         }
 
         public User AddUser(User user)
@@ -24,15 +25,18 @@ namespace FileDb.App.Services.UserServices
                 : ValidateAndAddUser(user);
         }
 
-        public void ShowUsers()
+        public List<User> ShowUsers()
         {
+           
             List<User> users = this.storageBroker.ReadAllUsers();
-
+            
             foreach (User user in users)
             {
                 this.loggingBroker.LogSuccessUser($"{user.Id}. {user.Name}");
             }
             this.loggingBroker.LogInforamation("===End of users===");
+
+            return users;
         }
 
         private User CreateAndLogInvalidUser()
@@ -62,7 +66,7 @@ namespace FileDb.App.Services.UserServices
             {
                 if (users[i] != null && users[i].Id == id)
                 {
-                    users[i] = null;
+                    users.RemoveAt(i);
                     this.loggingBroker.LogInforamation($"User with ID {id} deleted successfully.");
                     return;
                 }

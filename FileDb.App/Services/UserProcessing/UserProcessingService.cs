@@ -1,4 +1,5 @@
-﻿using FileDb.App.Models.Users;
+﻿using FileDb.App.Brokers.Storages;
+using FileDb.App.Models.Users;
 using FileDb.App.Services.Identities;
 using FileDb.App.Services.UserServices;
 
@@ -23,8 +24,11 @@ namespace FileDb.App.Services.UserProcessing
             this.userService.AddUser(user);
         }
 
-        public void DisplayUsers() =>
+        public void DisplayUsers()
+        {
             this.userService.ShowUsers();
+        }
+
 
         public void UpdateUser(int id, string name)
         {

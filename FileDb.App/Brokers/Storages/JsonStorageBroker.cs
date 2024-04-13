@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using FileDb.App.Brokers.Storages;
 using FileDb.App.Models.Users;
 
 namespace FileDb.App.Brokers.Storages
@@ -18,29 +17,27 @@ namespace FileDb.App.Brokers.Storages
 
         public User AddUser(User user)
         {
-            string usersString = File.ReadAllText(FilePath);
-            List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
+            string usersItems = File.ReadAllText(FilePath);
+            List<User> users = JsonSerializer.Deserialize<List<User>>(usersItems);
             users.Add(user);
-            string serializedUsers = JsonSerializer.Serialize(users);
-            File.WriteAllText(FilePath, serializedUsers);
+            string seralizedUsers = JsonSerializer.Serialize(users);
+            File.WriteAllText(FilePath, seralizedUsers);
 
             return user;
         }
 
         public List<User> ReadAllUsers()
         {
-            string usersString = File.ReadAllText(FilePath);
-            List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
-
+            string usersItems = File.ReadAllText(FilePath);
+            List<User> users = JsonSerializer.Deserialize<List<User>>(usersItems);
             return users;
         }
 
         public User UpdateUser(User user)
         {
-            string usersString = File.ReadAllText(FilePath);
-            List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
-
-            User updatedUser = users.Find(u => u.Id == user.Id);
+            string usersItems = File.ReadAllText(FilePath);
+            List<User> users = JsonSerializer.Deserialize<List<User>>(usersItems);
+            User updatedUser = users.FirstOrDefault(u => u.Id == user.Id);
             updatedUser.Name = user.Name;
 
             string serializedUsers = JsonSerializer.Serialize(users);
@@ -49,11 +46,11 @@ namespace FileDb.App.Brokers.Storages
             return updatedUser;
         }
 
-        public bool DeleteUser(int id)
+        public bool DeleteUser(int userId)
         {
-            string usersString = File.ReadAllText(FilePath);
-            List<User> users = JsonSerializer.Deserialize<List<User>>(usersString);
-            User user = users.FirstOrDefault(u => u.Id == id);
+            string usersItems = File.ReadAllText(FilePath);
+            List<User> users = JsonSerializer.Deserialize<List<User>>(usersItems);
+            User user = users.FirstOrDefault(u => u.Id == userId);
             users.Remove(user);
             string serializedUsers = JsonSerializer.Serialize(users);
             File.WriteAllText(FilePath, serializedUsers);
@@ -67,6 +64,7 @@ namespace FileDb.App.Brokers.Storages
             if (fileExists is false)
             {
                 File.Create(FilePath).Close();
+                File.WriteAllText(FilePath, "[]");
             }
         }
     }

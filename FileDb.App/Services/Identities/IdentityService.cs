@@ -1,6 +1,6 @@
 ﻿using FileDb.App.Brokers.Storages;
-using FileDb.App.Brokers.Storages;
 using FileDb.App.Models.Users;
+using System;
 using System.Collections.Generic;
 
 namespace FileDb.App.Services.Identities
@@ -10,16 +10,16 @@ namespace FileDb.App.Services.Identities
         private static IdentityService instance;
         private readonly IStoragesBroker storagesBroker;
 
-        private IdentityService()
+        private IdentityService(IStoragesBroker storagesBroker)
         {
-            this.storagesBroker = new JsonStorageBroker();
+            this.storagesBroker = storagesBroker;
         }
 
-        public static IdentityService GetIdentityService()
+        public static IdentityService GetIdentityService(IStoragesBroker storagesBroker)
         {
             if (instance == null)
             {
-                instance = new IdentityService();
+                instance = new IdentityService(storagesBroker);
             }
             return instance;
         }
@@ -36,7 +36,6 @@ namespace FileDb.App.Services.Identities
         private static int IncrementListUsersId(List<User> users)
         {
             return users[users.Count - 1].Id + 1;
-            
         }
     }
 }
