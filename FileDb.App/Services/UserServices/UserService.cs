@@ -82,7 +82,6 @@ namespace FileDb.App.Services.UserServices
             if (user is null)
             {
                 this.loggingBroker.LogError("Your user is empty");
-                return;
             }
 
             if (user.Id == 0 || String.IsNullOrEmpty(user.Name))
