@@ -20,7 +20,7 @@ namespace FileDb.App.Services.Identities
 
         public static IdentityService GetIdentityService(IStoragesBroker storagesBroker)
         {
-            if (instance == null)
+            if (instance is null)
             {
                 instance = new IdentityService(storagesBroker);
             }
