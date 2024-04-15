@@ -3,8 +3,10 @@
 //----------------------------------------
 
 using System;
+using System.IO;
 using FileDb.App.Brokers.Storages;
 using FileDb.App.Services.Identities;
+using FileDb.App.Services.SizeOfFiles;
 using FileDb.App.Services.UserProcessing;
 using FileDb.App.Services.UserServices;
 
@@ -12,64 +14,93 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("===== Welcome to my File Database Library =====");
-        PrintTxtOrJSON();
-        IUserProcessingService userProcessingService = InitializeServices();
-
-        string userChoice;
+        string restartProgram;
         do
         {
             Console.Clear();
-            PrintMenu();
-            Console.Write("Enter your choice: ");
-            userChoice = Console.ReadLine();
-            switch (userChoice)
+            Console.WriteLine("===== Welcome to my File Database Library =====");
+            string fileOrUserChoice;
+            PrintFilesOrUsers();
+            fileOrUserChoice = Console.ReadLine();
+            switch (fileOrUserChoice)
             {
                 case "1":
-                    Console.Clear();
-                    Console.Write("Enter your name: ");
-                    string userName = Console.ReadLine();
-                    userProcessingService.CreateNewUser(userName);
-                    break;
+                    {
+                        Console.WriteLine("===== Welcome to the Working with Files! =====\n");
 
+                        string assetsPath = "../../../Assets";
+
+                        Folder folder = new Folder(assetsPath);
+                        PopulateFolder(folder, assetsPath);
+                        folder.PrintFileInfo();
+                        break;
+                    }
                 case "2":
                     {
+                        PrintTxtOrJSON();
+                        IUserProcessingService userProcessingService = InitializeServices();
+
+                        string userChoice;
+                        do
+                        {
+                            PrintMenu();
+                            Console.Write("Enter your choice: ");
+                            userChoice = Console.ReadLine();
+                            switch (userChoice)
+                            {
+                                case "1":
+                                    Console.Clear();
+                                    Console.Write("Enter your name: ");
+                                    string userName = Console.ReadLine();
+                                    userProcessingService.CreateNewUser(userName);
+                                    break;
+
+                                case "2":
+                                    {
+                                        Console.Clear();
+                                        userProcessingService.DisplayUsers();
+                                    }
+                                    break;
+
+                                case "3":
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Enter an ID which you want to delete");
+                                        Console.Write("Enter ID: ");
+                                        int deleteWithId = Convert.ToInt32(Console.ReadLine());
+                                        userProcessingService.DeleteUser(deleteWithId);
+                                    }
+                                    break;
+
+                                case "4":
+                                    {
+                                        Console.Clear();
+                                        Console.Write("Enter an ID which you want to edit >>> ");
+                                        int id = Convert.ToInt32(Console.ReadLine());
+                                        Console.Write("Enter new name >>> ");
+                                        string newName = Console.ReadLine();
+                                        userProcessingService.UpdateUser(id, newName);
+                                    }
+                                    break;
+
+                                case "0": break;
+
+                                default:
+                                    Console.WriteLine("You entered wrong input, please try again!");
+                                    break;
+                            }
+                        }
+                        while (userChoice != "0");
                         Console.Clear();
-                        userProcessingService.DisplayUsers();
+
+                        Console.WriteLine("\nThe app has been finished, thanks bye!");
+                        break;
                     }
-                    break;
-
-                case "3":
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Enter an ID which you want to delete");
-                        Console.Write("Enter ID: ");
-                        int deleteWithId = Convert.ToInt32(Console.ReadLine());
-                        userProcessingService.DeleteUser(deleteWithId);
-                    }
-                    break;
-
-                case "4":
-                    {
-                        Console.Clear();
-                        Console.Write("Enter an ID which you want to edit >>> ");
-                        int id = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Enter new name >>> ");
-                        string newName = Console.ReadLine();
-                        userProcessingService.UpdateUser(id, newName);
-                    }
-                    break;
-
-                case "0": break;
-
-                default:
-                    Console.WriteLine("You entered wrong input, please try again!");
-                    break;
+                default: Console.WriteLine("Menu selection ERROR!"); break;
             }
-        }
-        while (userChoice != "0");
-        Console.Clear();
-        Console.WriteLine("The app has been finished, thanks bye!");
+            Console.Write("Do you want to use the program again? [1 - Yes/0 - No] >>> ");
+            restartProgram = Console.ReadLine();
+        } while (restartProgram != "0");
     }
 
     private static IUserProcessingService InitializeServices()
@@ -100,6 +131,36 @@ internal class Program
         IUserProcessingService userProcessingService = new UserProcessingService(userService, identityService);
 
         return userProcessingService;
+    }
+
+    static void PopulateFolder(Folder folder, string foldersPath)
+    {
+        try
+        {
+            foreach (string filePath in Directory.GetFiles(foldersPath))
+            {
+                FileInfo fileInfo = new FileInfo(filePath);
+                folder.Add(new Files(fileInfo.Name, fileInfo.Length));
+            }
+
+            foreach (string subFolderPath in Directory.GetDirectories(foldersPath))
+            {
+                Folder subFolders = new Folder(Path.GetFileName(subFolderPath));
+                PopulateFolder(subFolders, subFolderPath);
+                folder.Add(subFolders);
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Error in the File: {foldersPath} |||   Exception: {exception.Message}");
+        }
+    }
+
+    private static void PrintFilesOrUsers()
+    {
+        Console.WriteLine("1. Work with Files");
+        Console.WriteLine("2. Work with Users");
+        Console.Write("Choose >>> ");
     }
 
     private static void PrintTxtOrJSON()
