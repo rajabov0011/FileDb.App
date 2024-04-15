@@ -31,7 +31,7 @@ internal class Program
                         string assetsPath = "../../../Assets";
 
                         Folder folder = new Folder(assetsPath);
-                        PopulateFolder(folder, assetsPath);
+                        WorkWithFolder(folder, assetsPath);
                         folder.PrintFileInfo();
                         break;
                     }
@@ -133,7 +133,7 @@ internal class Program
         return userProcessingService;
     }
 
-    static void PopulateFolder(Folder folder, string foldersPath)
+    static void WorkWithFolder(Folder folder, string foldersPath)
     {
         try
         {
