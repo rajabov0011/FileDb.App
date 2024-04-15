@@ -146,7 +146,7 @@ internal class Program
             foreach (string subFolderPath in Directory.GetDirectories(foldersPath))
             {
                 Folder subFolders = new Folder(Path.GetFileName(subFolderPath));
-                PopulateFolder(subFolders, subFolderPath);
+                WorkWithFolder(subFolders, subFolderPath);
                 folder.Add(subFolders);
             }
         }
