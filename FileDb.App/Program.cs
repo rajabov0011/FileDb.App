@@ -5,8 +5,8 @@
 using System;
 using System.IO;
 using FileDb.App.Brokers.Storages;
-using FileDb.App.Services.Identities;
-using FileDb.App.Services.SizeOfFiles;
+using FileDb.App.Services.Identity;
+using FileDb.App.Services.FileService;
 using FileDb.App.Services.UserProcessing;
 using FileDb.App.Services.UserServices;
 
@@ -141,7 +141,7 @@ internal class Program
             foreach (string filePath in Directory.GetFiles(foldersPath))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
-                folder.Add(new FileDb.App.Services.SizeOfFiles.File(fileInfo.Name, fileInfo.Length));
+                folder.Add(new FileDb.App.Services.FileService.File(fileInfo.Name, fileInfo.Length));
             }
 
             foreach (string subFolderPath in Directory.GetDirectories(foldersPath))

@@ -2,7 +2,7 @@
 // Tarteeb School (c) All rights reserved
 //----------------------------------------
 
-namespace FileDb.App.Services.SizeOfFiles
+namespace FileDb.App.Services.FileService
 {
     internal interface IFileSystemComponent
     {

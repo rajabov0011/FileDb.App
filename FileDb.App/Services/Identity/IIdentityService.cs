@@ -2,7 +2,7 @@
 // Tarteeb School (c) All rights reserved
 //----------------------------------------
 
-namespace FileDb.App.Services.Identities
+namespace FileDb.App.Services.Identity
 {
     internal interface IIdentityService
     {

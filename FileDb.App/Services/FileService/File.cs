@@ -4,7 +4,7 @@
 
 using System;
 
-namespace FileDb.App.Services.SizeOfFiles
+namespace FileDb.App.Services.FileService
 {
     internal class File : IFileSystemComponent
     {
