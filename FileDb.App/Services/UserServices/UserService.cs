@@ -92,9 +92,7 @@ namespace FileDb.App.Services.UserServices
             this.storageBroker.UpdateUser(user);
         }
 
-        public void Delete(int id)
-        {
+        public void Delete(int id) =>
             this.storageBroker.DeleteUser(id);
-        }
     }
 }

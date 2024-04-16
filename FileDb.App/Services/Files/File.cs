@@ -6,20 +6,21 @@ using System;
 
 namespace FileDb.App.Services.SizeOfFiles
 {
-    internal class Files : IFileSystemComponent
+    internal class File : IFileSystemComponent
     {
         public string Name { get; set; }
         public long Size { get; set; }
         
-        public Files(string name, long size) 
+        public File(string name, long size) 
         {
             this.Name = name;
             this.Size = size;
         }
 
-        public void PrintFileInfo()
-        {
+        public long getSize() =>
+            this.Size;
+
+        public void PrintFileInfo() =>
             Console.WriteLine($"File:  {this.Name} -> Size:  {this.Size} bytes");
-        }
     }
 }

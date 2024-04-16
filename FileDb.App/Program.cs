@@ -26,12 +26,13 @@ internal class Program
             {
                 case "1":
                     {
+                        Console.Clear();
                         Console.WriteLine("===== Welcome to the Working with Files! =====\n");
 
                         string assetsPath = "../../../Assets";
 
-                        Folder folder = new Folder(assetsPath);
-                        WorkWithFolder(folder, assetsPath);
+                        CompositeFile folder = new CompositeFile(assetsPath);
+                        WorkWithSizeOfFiles(folder, assetsPath);
                         folder.PrintFileInfo();
                         break;
                     }
@@ -92,15 +93,15 @@ internal class Program
                         }
                         while (userChoice != "0");
                         Console.Clear();
-
-                        Console.WriteLine("\nThe app has been finished, thanks bye!");
                         break;
                     }
                 default: Console.WriteLine("Menu selection ERROR!"); break;
             }
-            Console.Write("Do you want to use the program again? [1 - Yes/0 - No] >>> ");
+            Console.Write("\nDo you want to use the program again? [1 - Yes/0 - No] >>> ");
             restartProgram = Console.ReadLine();
         } while (restartProgram != "0");
+        Console.Clear();
+        Console.WriteLine("\nThe app has been finished, thanks bye!");
     }
 
     private static IUserProcessingService InitializeServices()
@@ -133,32 +134,32 @@ internal class Program
         return userProcessingService;
     }
 
-    static void WorkWithFolder(Folder folder, string foldersPath)
+    static void WorkWithSizeOfFiles(CompositeFile folder, string foldersPath)
     {
         try
         {
             foreach (string filePath in Directory.GetFiles(foldersPath))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
-                folder.Add(new Files(fileInfo.Name, fileInfo.Length));
+                folder.Add(new FileDb.App.Services.SizeOfFiles.File(fileInfo.Name, fileInfo.Length));
             }
 
             foreach (string subFolderPath in Directory.GetDirectories(foldersPath))
             {
-                Folder subFolders = new Folder(Path.GetFileName(subFolderPath));
-                WorkWithFolder(subFolders, subFolderPath);
+                CompositeFile subFolders = new CompositeFile(Path.GetFileName(subFolderPath));
+                WorkWithSizeOfFiles(subFolders, subFolderPath);
                 folder.Add(subFolders);
             }
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Error in the File: {foldersPath} |||   Exception: {exception.Message}");
+            Console.WriteLine($"Error in the File: {foldersPath} |||  Exception: {exception.Message}");
         }
     }
 
     private static void PrintFilesOrUsers()
     {
-        Console.WriteLine("1. Work with Files");
+        Console.WriteLine("1. Know the size of Files");
         Console.WriteLine("2. Work with Users");
         Console.Write("Choose >>> ");
     }

@@ -27,10 +27,8 @@ namespace FileDb.App.Services.UserProcessing
             this.userService.AddUser(user);
         }
 
-        public void DisplayUsers()
-        {
+        public void DisplayUsers() =>
             this.userService.ShowUsers();
-        }
 
         public void UpdateUser(int id, string name)
         {
