@@ -11,11 +11,11 @@ This library uses ``Design Patterns`` to read and write data to ``JSON`` and ``T
   > In my ``FileDb.App`` project, I solved various problems by referring to a single ``IUSerService`` class to ``.json`` or ``.txt`` files through ``Dependency Injection``.
   - ``JSONStorageBroker`` is implemented from the ``IStorageBroker`` interface.
     <p align="center">
-    <img src="" alt="ImplementationJSONStorageBrokerWithIStorageBroker">
+    <img src="https://github.com/rajabov0011/FileDb.App/blob/master/FileDb.App/Assets/Demos/ImplementationJSONStorageBrokerWithIStorageBroker.png" alt="ImplementationJSONStorageBrokerWithIStorageBroker">
     </p>
   - ``FileStorageBroker`` is implemented from the ``IStorageBroker`` interface.
     <p align="center">
-    <img src="" alt="ImplementationFileStorageBrokerWithIStorageBroker">
+    <img src="https://github.com/rajabov0011/FileDb.App/blob/master/FileDb.App/Assets/Demos/ImplementationFileStorageBrokerWithIStorageBroker.png" alt="ImplementationFileStorageBrokerWithIStorageBroker">
     </p>
   > When communicating with external technologies in our program, we refer to ``Service classes``. Here you can see the ``IUserService`` interface, which contains the common business logic for    ``JSON`` and ``File`` brokers, which have their own logic in the ``Broker`` layer.
 - **Dependency Inversion**: This pattern helps in extending and modifying the program structure. It prevents high-level modules from being dependent on low-level modules.
@@ -28,7 +28,7 @@ This library uses ``Design Patterns`` to read and write data to ``JSON`` and ``T
 > [!TIP]
 > This is the code example about the application of Singleton Pattern in our FileDb project.
 <p align="center">
-    <img src="" alt="SingletonPatternIdentityService">
+    <img src="https://github.com/rajabov0011/FileDb.App/blob/master/FileDb.App/Assets/Demos/SingletonPatternIdentityService.png" alt="SingletonPatternIdentityService">
     </p>
 
   > Let's talk about what the IdentitiyService.cs thread does. This class serves us to create an automatic unique id until we write the User data to a JSON or TXT file, and this is where we need the Singleton Pattern. The program will accurately generate the next id while keeping the previous id.
