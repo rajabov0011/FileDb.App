@@ -4,14 +4,14 @@
 
 using System;
 
-namespace FileDb.App.Services.FileService
+namespace FileDb.App.Services.Files
 {
-    internal class File : IFileSystemComponent
+    internal class FileService : IFileSystemComponent
     {
         public string Name { get; set; }
         public long Size { get; set; }
         
-        public File(string name, long size) 
+        public FileService(string name, long size) 
         {
             this.Name = name;
             this.Size = size;

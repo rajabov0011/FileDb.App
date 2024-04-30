@@ -6,7 +6,7 @@ using FileDb.App.Brokers.Storages;
 using FileDb.App.Models.Users;
 using System.Collections.Generic;
 
-namespace FileDb.App.Services.Identity
+namespace FileDb.App.Services.Identities
 {
     internal sealed class IdentityService : IIdentityService
     {

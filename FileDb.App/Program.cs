@@ -5,10 +5,11 @@
 using System;
 using System.IO;
 using FileDb.App.Brokers.Storages;
-using FileDb.App.Services.Identity;
-using FileDb.App.Services.FileService;
+using FileDb.App.Services.Identities;
+using FileDb.App.Services.Files;
 using FileDb.App.Services.UserProcessing;
 using FileDb.App.Services.UserServices;
+using FileDb.App.Brokers.Loggings;
 
 internal class Program
 {
@@ -31,7 +32,7 @@ internal class Program
 
                         string assetsPath = "../../../Assets";
 
-                        CompositeFile folder = new CompositeFile(assetsPath);
+                        CompositeFileService folder = new CompositeFileService(assetsPath);
                         WorkWithSizeOfFiles(folder, assetsPath);
                         folder.PrintFileInfo();
                         break;
@@ -134,26 +135,27 @@ internal class Program
         return userProcessingService;
     }
 
-    static void WorkWithSizeOfFiles(CompositeFile folder, string foldersPath)
+    static void WorkWithSizeOfFiles(CompositeFileService folder, string foldersPath)
     {
         try
         {
             foreach (string filePath in Directory.GetFiles(foldersPath))
             {
                 FileInfo fileInfo = new FileInfo(filePath);
-                folder.Add(new FileDb.App.Services.FileService.File(fileInfo.Name, fileInfo.Length));
+                folder.Add(new FileDb.App.Services.Files.FileService(fileInfo.Name, fileInfo.Length));
             }
 
             foreach (string subFolderPath in Directory.GetDirectories(foldersPath))
             {
-                CompositeFile subFolders = new CompositeFile(Path.GetFileName(subFolderPath));
+                CompositeFileService subFolders = new CompositeFileService(Path.GetFileName(subFolderPath));
                 WorkWithSizeOfFiles(subFolders, subFolderPath);
                 folder.Add(subFolders);
             }
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Error in the File: {foldersPath} |||  Exception: {exception.Message}");
+            ILoggingBroker loggingBroker = new LoggingBroker();
+            loggingBroker.LogError($"Error in the File: {foldersPath} |||  Exception: {exception.Message}");
         }
     }
 

@@ -4,15 +4,15 @@
 
 using System.Collections.Generic;
 
-namespace FileDb.App.Services.FileService
+namespace FileDb.App.Services.Files
 {
-    internal class CompositeFile : IFileSystemComponent
+    internal class CompositeFileService : IFileSystemComponent
     {
         private readonly List<IFileSystemComponent> components = new List<IFileSystemComponent> ();
 
         public string Name { get; }
 
-        public CompositeFile(string name)
+        public CompositeFileService(string name)
         {
             this.Name = name;
         }
